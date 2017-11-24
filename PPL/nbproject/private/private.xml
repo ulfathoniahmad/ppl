@@ -5,6 +5,12 @@
         <group>
             <file>file:/C:/Users/JEE/Documents/NetBeansProjects/PPL/src/model/alarm.java</file>
             <file>file:/C:/Users/JEE/Documents/NetBeansProjects/PPL/src/contoroler/c_penyakit.java</file>
+            <file>file:/C:/Users/JEE/Documents/NetBeansProjects/PPL/src/ppl/PPL.java</file>
+            <file>file:/C:/Users/JEE/Documents/NetBeansProjects/PPL/src/contoroler/c_home.java</file>
+            <file>file:/C:/Users/JEE/Documents/NetBeansProjects/PPL/src/contoroler/c_pupuk.java</file>
+            <file>file:/C:/Users/JEE/Documents/NetBeansProjects/PPL/src/view/pupuk.java</file>
+            <file>file:/C:/Users/JEE/Documents/NetBeansProjects/PPL/src/view/isiPenyakit.java</file>
+            <file>file:/C:/Users/JEE/Documents/NetBeansProjects/PPL/src/model/m_pupuk.java</file>
         </group>
     </open-files>
 </project-private>

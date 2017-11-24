@@ -14,29 +14,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import model.m_penyakit;
+import model.m_pupuk;
 import view.hasil;
-import view.isiPenyakit;
+import view.pupuk;
 
 /**
  *
  * @author JEE
  */
-public class c_penyakit {
+public class c_pupuk {
 
+    pupuk view;
     hasil views;
-    isiPenyakit view;
-    m_penyakit model;
+    m_pupuk model;
 
-    public c_penyakit() throws SQLException {
-        view = new isiPenyakit();
+    public c_pupuk() throws SQLException {
+        view = new pupuk();
         views = new hasil();
-        model = new m_penyakit();
-        view.getAnalisa().addMouseListener((MouseListener) new klikAnalisa());
+        model = new m_pupuk();
+        view.getAnalisa().addMouseListener((MouseListener)new klikAnalisa());
         view.setVisible(true);
         view.getKembali().addMouseListener((MouseListener) new klikKembali());
         views.getHome().addActionListener(new klikHome());
     }
+
 
     private class klikHome implements ActionListener {
 
@@ -92,25 +93,25 @@ public class c_penyakit {
                 Logger.getLogger(c_home.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
-
+    
     private class klikAnalisa implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            String jenisPohon = (String) view.getjenisPohon().getSelectedItem();
-            String kondisiPohon = (String) view.getkondisiPohon().getSelectedItem();
-            String kondisiDaun = (String) view.getkondisiDaun().getSelectedItem();
-            String kondisiBuah = (String) view.getkondisiBuah().getSelectedItem();
+            String strukturTanah = (String) view.getstrukturTanah().getSelectedItem();
+            String luasTanah = (String) view.getluasTanah().getSelectedItem();
+            String jenisTanah = (String) view.getjenisTanah().getSelectedItem();
+            String jumlahPohon = (String) view.getjumlahPohon().getSelectedItem();
+            String kadarAir = (String) view.getkadarAir().getSelectedItem();
+            String jumlahPH = (String) view.getjumlahPH().getSelectedItem();
 
             try {
-                if (jenisPohon.equals("") || kondisiPohon.equals("") || kondisiDaun.equals("") || kondisiBuah.equals("")) {
+                if (strukturTanah.equals("") || luasTanah.equals("") || jenisTanah.equals("") || jumlahPohon.equals("") || kadarAir.equals("") || jumlahPH.equals("")) {
                     JOptionPane.showMessageDialog(view, "data tidak boleh ada yang kosong");
-                    view.setVisible(true);
                 } else {
-                    model.penyakit(jenisPohon, kondisiPohon, kondisiDaun, kondisiBuah);
-                    views.getHasil().setText(model.penyakit(jenisPohon, kondisiPohon, kondisiDaun, kondisiBuah));
+                    model.analisa(strukturTanah, luasTanah, jenisTanah, jumlahPohon, kadarAir, jumlahPH);
+                    views.getHasil().setText(model.analisa(strukturTanah, luasTanah, jenisTanah, jumlahPohon, kadarAir, jumlahPH));
                     if (views.getHasil().getText().equals("")) {
                         JOptionPane.showMessageDialog(view, "Data Masih belum Ada");
                     } else {
@@ -119,10 +120,9 @@ public class c_penyakit {
                     }
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(c_penyakit.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(c_pupuk.class.getName()).log(Level.SEVERE, null, ex);
 
             }
-
         }
 
         @Override
@@ -132,30 +132,31 @@ public class c_penyakit {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            ImageIcon II = new ImageIcon(getClass().getResource("/gambar/anal.png"));
-            view.getAnalisa().setIcon(II);
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
             ImageIcon II = new ImageIcon(getClass().getResource("/gambar/anal1.png"));
             view.getAnalisa().setIcon(II);
         }
 
         @Override
+        public void mouseExited(MouseEvent e) {
+            ImageIcon II = new ImageIcon(getClass().getResource("/gambar/anal.png"));
+            view.getAnalisa().setIcon(II);
+        }
+
+        @Override
         public void mousePressed(MouseEvent e) {
-            String jenisPohon = (String) view.getjenisPohon().getSelectedItem();
-            String kondisiPohon = (String) view.getkondisiPohon().getSelectedItem();
-            String kondisiDaun = (String) view.getkondisiDaun().getSelectedItem();
-            String kondisiBuah = (String) view.getkondisiBuah().getSelectedItem();
+            String strukturTanah = (String) view.getstrukturTanah().getSelectedItem();
+            String luasTanah = (String) view.getluasTanah().getSelectedItem();
+            String jenisTanah = (String) view.getjenisTanah().getSelectedItem();
+            String jumlahPohon = (String) view.getjumlahPohon().getSelectedItem();
+            String kadarAir = (String) view.getkadarAir().getSelectedItem();
+            String jumlahPH = (String) view.getjumlahPH().getSelectedItem();
 
             try {
-                if (jenisPohon.equals("") || kondisiPohon.equals("") || kondisiDaun.equals("") || kondisiBuah.equals("")) {
+                if (strukturTanah.equals("") || luasTanah.equals("") || jenisTanah.equals("") || jumlahPohon.equals("") || kadarAir.equals("") || jumlahPH.equals("")) {
                     JOptionPane.showMessageDialog(view, "data tidak boleh ada yang kosong");
-                    view.setVisible(true);
                 } else {
-                    model.penyakit(jenisPohon, kondisiPohon, kondisiDaun, kondisiBuah);
-                    views.getHasil().setText(model.penyakit(jenisPohon, kondisiPohon, kondisiDaun, kondisiBuah));
+                    model.analisa(strukturTanah, luasTanah, jenisTanah, jumlahPohon, kadarAir, jumlahPH);
+                    views.getHasil().setText(model.analisa(strukturTanah, luasTanah, jenisTanah, jumlahPohon, kadarAir, jumlahPH));
                     if (views.getHasil().getText().equals("")) {
                         JOptionPane.showMessageDialog(view, "Data Masih belum Ada");
                     } else {
@@ -164,11 +165,9 @@ public class c_penyakit {
                     }
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(c_penyakit.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(c_pupuk.class.getName()).log(Level.SEVERE, null, ex);
 
             }
-
         }
-
     }
 }

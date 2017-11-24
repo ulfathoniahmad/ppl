@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import java.util.Timer;
+import model.alarm;
 import view.Home;
 
 /**
@@ -22,12 +24,32 @@ import view.Home;
 public class c_home {
 
     Home view;
+    Timer timer;
+    alarm alr;
 
     public c_home() throws SQLException {
         view = new Home();
+        alr = new alarm();
         view.setVisible(true);
         view.getPupuk().addMouseListener((MouseListener) new klikPupuk());
         view.getPenyakit().addMouseListener((MouseListener) new klikPenyakit());
+        view.getGo().addActionListener(new klikGo());
+    }
+
+    private class klikGo implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                alr.checkAlarm("jeruk").run();
+                timer = new Timer();
+                timer.schedule(alr.checkAlarm("jeruk"), 1000, 10000);
+            } catch (SQLException ex) {
+                Logger.getLogger(c_home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+
     }
 
     private class klikPupuk implements MouseListener {
@@ -35,7 +57,7 @@ public class c_home {
         @Override
         public void mouseClicked(MouseEvent e) {
             try {
-                c_isidata c_isidata = new c_isidata();
+                c_pupuk c_isidata = new c_pupuk();
 
                 view.dispose();
             } catch (SQLException ex) {
@@ -46,7 +68,7 @@ public class c_home {
         @Override
         public void mousePressed(MouseEvent e) {
             try {
-                c_isidata c_isidata = new c_isidata();
+                c_pupuk c_isidata = new c_pupuk();
 
                 view.dispose();
             } catch (SQLException ex) {

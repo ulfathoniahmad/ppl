@@ -22,8 +22,8 @@ public class PPL {
     public static void main(String[] args) throws SQLException {
 
 //        alarm b = new alarm();
-//        b.checkAlarm("kopi");
- new c_home();
+//        b.checkAlarm("jeruk");
+        new c_home();
 //    new jadwal();
     }
 

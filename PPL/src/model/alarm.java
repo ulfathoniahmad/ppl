@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimerTask;
+import java.util.Timer;
 import javax.swing.JOptionPane;
 import ppl.koneksi;
 
@@ -19,12 +21,13 @@ import ppl.koneksi;
 public class alarm {
 
     koneksi kon;
+    TimerTask task;
 
     public alarm() throws SQLException {
         kon = new koneksi("ppl", "root", "");
     }
 
-    public void checkAlarm(String bibit) throws SQLException {
+    public TimerTask checkAlarm(String bibit) throws SQLException {
         String query = " Select * from penjadwalan where bibit = '" + bibit + "'";
         ResultSet rs = kon.getResult(query);
         String tindakan[] = new String[5];
@@ -41,35 +44,56 @@ public class alarm {
             time[2] = Integer.parseInt(rs.getString("timer3"));
             time[3] = Integer.parseInt(rs.getString("timer4"));
             time[4] = Integer.parseInt(rs.getString("timer5"));
+
+            task = new TimerTask() {
+
+                public void run() {
+                    for (int a = 0; a <= 4; a++) {
+                        System.out.println(a);
+//                        detik = time[a];
+                        System.out.println(" atau "+time[a]);
+                        if (time[a] > 0) {
+                            time[a]--;
+//                            System.out.println("detik" + detik--);
+                            if (time[a] == 0) {
+                                System.out.println(time[a] + tindakan[a]);
+                            }
+                        }
+                        
+                    }
+                }
+            };
         }
 //        Thread t = new Thread() {
+//            Calendar c = Calendar.getInstance(Locale.ROOT);
+//            int tgl = c.get(Calendar.DAY_OF_MONTH);
+//            int hours = c.get(Calendar.HOUR);
+//            int minit = c.get(Calendar.MINUTE);
+//            int a = 0;
+//
 //            public void run() {
 ////                int wl = 0;
 ////                while (wl == 0) {
-//                    Calendar c = Calendar.getInstance(Locale.ROOT);
-//                    int tgl = c.get(Calendar.DAY_OF_MONTH);
-//                    int hours = c.get(Calendar.HOUR);
-//                    int minit = c.get(Calendar.MINUTE);
-//                    
-//                    System.out.println(minit+time[0]);
-//                    for (int a = time.length; a < time.length; a++) {
-//                        int b = minit+time[a];
-//                        System.out.println(b);
-//                        if (b == minit) {
-//                            JOptionPane.showMessageDialog(null, "Sekarang Jam " + b);
-//                            System.out.println("berhasil");
 //
-//                        }
-//                        break;
+//                while (a < 5) {
+////                    int b = minit + time[a];
+////                    System.out.println("menit " + b + ":" + tindakan[a]);
+//                    System.out.println("error");
+//                    if (minit == (minit + time[a])) {
+//                        JOptionPane.showMessageDialog(null, "Sekarang Jam " + (minit + time[a]));
+//                        System.out.println("berhasil");
+//                        System.out.println(tindakan[a]);
+//
 //                    }
+//                    a++;
 //
-////                }
+//                }
 //            }
 //        };
 //        t.setPriority(Thread.MIN_PRIORITY);
 //        t.start();
 
-
+        return task;
     }
 
 //    public void setAlarmnya(String bibit) throws SQLException {

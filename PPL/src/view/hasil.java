@@ -26,7 +26,7 @@ public class hasil extends javax.swing.JFrame {
         return hasil_tx;
     }
 
-    public JButton getKembali() {
+    public JButton getHome() {
         return kembali_btn;
     }
 
