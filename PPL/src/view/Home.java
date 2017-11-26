@@ -5,8 +5,14 @@
  */
 package view;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import ppl.koneksi;
 
 /**
  *
@@ -17,22 +23,38 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
-    public Home() {
+    koneksi kon;
+
+    public Home() throws SQLException {
         initComponents();
+        kon = new koneksi("ppl", "root", "");
+        jenisPohon();
     }
 
-    
-    public JLabel getPupuk(){
+    public void jenisPohon() throws SQLException {
+        String query = "SELECT * FROM penjadwalan group by bibit ";
+        ResultSet rs = kon.getResult(query);
+        while (rs.next()) {
+            bibit_cb.addItem(rs.getString("bibit"));
+        }
+    }
+
+    public JLabel getPupuk() {
         return pupuk_btn;
     }
-    
-    public JLabel getPenyakit(){
+
+    public JComboBox<String> getBibit() {
+        return bibit_cb;
+    }
+
+    public JLabel getPenyakit() {
         return penyakit_btn;
     }
-    
-    public JButton getGo(){
+
+    public JButton getGo() {
         return go_btn;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,11 +66,12 @@ public class Home extends javax.swing.JFrame {
 
         pupuk_btn = new javax.swing.JLabel();
         penyakit_btn = new javax.swing.JLabel();
-        combo = new javax.swing.JComboBox<>();
+        bibit_cb = new javax.swing.JComboBox<>();
         go_btn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,7 +79,7 @@ public class Home extends javax.swing.JFrame {
 
         penyakit_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/pest.png"))); // NOI18N
 
-        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pilih bibit" }));
+        bibit_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PILIH BIBIT" }));
 
         go_btn.setText("GO");
         go_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -72,16 +95,14 @@ public class Home extends javax.swing.JFrame {
         jLabel2.setText("ANALISA PUPUK");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel3.setText("ANALISA PENYAKIT");
+        jLabel3.setText("PENYAKIT");
+
+        jLabel4.setText("ALARM");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(go_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -90,17 +111,22 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pupuk_btn, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(pupuk_btn, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(102, 102, 102)
-                                .addComponent(penyakit_btn))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(penyakit_btn)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel3))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addComponent(jLabel3)))))
-                .addContainerGap(86, Short.MAX_VALUE))
+                                .addComponent(bibit_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(107, 107, 107)
+                                .addComponent(go_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4))))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,10 +141,12 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pupuk_btn)
                     .addComponent(penyakit_btn))
-                .addGap(80, 80, 80)
+                .addGap(48, 48, 48)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(go_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bibit_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72))
         );
 
@@ -159,17 +187,22 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                try {
+                    new Home().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> combo;
+    private javax.swing.JComboBox<String> bibit_cb;
     private javax.swing.JButton go_btn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel penyakit_btn;
     private javax.swing.JLabel pupuk_btn;
     // End of variables declaration//GEN-END:variables

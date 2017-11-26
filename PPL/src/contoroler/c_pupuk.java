@@ -32,25 +32,10 @@ public class c_pupuk {
         view = new pupuk();
         views = new hasil();
         model = new m_pupuk();
-        view.getAnalisa().addMouseListener((MouseListener)new klikAnalisa());
+        view.getAnalisa().addMouseListener((MouseListener) new klikAnalisa());
         view.setVisible(true);
         view.getKembali().addMouseListener((MouseListener) new klikKembali());
-        views.getHome().addActionListener(new klikHome());
-    }
-
-
-    private class klikHome implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                new c_home();
-                views.dispose();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(c_home.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        view.getReset().addMouseListener((MouseListener) new klikReset());
     }
 
     private class klikKembali implements MouseListener {
@@ -68,7 +53,7 @@ public class c_pupuk {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
@@ -94,29 +79,22 @@ public class c_pupuk {
             }
         }
     }
-    
+
     private class klikAnalisa implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            String strukturTanah = (String) view.getstrukturTanah().getSelectedItem();
-            String luasTanah = (String) view.getluasTanah().getSelectedItem();
-            String jenisTanah = (String) view.getjenisTanah().getSelectedItem();
-            String jumlahPohon = (String) view.getjumlahPohon().getSelectedItem();
-            String kadarAir = (String) view.getkadarAir().getSelectedItem();
-            String jumlahPH = (String) view.getjumlahPH().getSelectedItem();
+            String namabuah = (String) view.getNamaBuah().getSelectedItem();
+            String umur = (String) view.getUmur().getSelectedItem();
 
             try {
-                if (strukturTanah.equals("") || luasTanah.equals("") || jenisTanah.equals("") || jumlahPohon.equals("") || kadarAir.equals("") || jumlahPH.equals("")) {
+                if (namabuah.equals("") || umur.equals("")) {
                     JOptionPane.showMessageDialog(view, "data tidak boleh ada yang kosong");
                 } else {
-                    model.analisa(strukturTanah, luasTanah, jenisTanah, jumlahPohon, kadarAir, jumlahPH);
-                    views.getHasil().setText(model.analisa(strukturTanah, luasTanah, jenisTanah, jumlahPohon, kadarAir, jumlahPH));
-                    if (views.getHasil().getText().equals("")) {
-                        JOptionPane.showMessageDialog(view, "Data Masih belum Ada");
-                    } else {
-                        view.dispose();
-                        views.setVisible(true);
+                    model.analisa(namabuah, umur);
+                    view.getHasil().setText(model.analisa(namabuah, umur));
+                    if (view.getHasil().getText().equals("")) {
+                        JOptionPane.showMessageDialog(view, "SiLahkan Pilih Data Terlebih Dahulu");
                     }
                 }
             } catch (SQLException ex) {
@@ -127,7 +105,7 @@ public class c_pupuk {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
@@ -144,30 +122,55 @@ public class c_pupuk {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            String strukturTanah = (String) view.getstrukturTanah().getSelectedItem();
-            String luasTanah = (String) view.getluasTanah().getSelectedItem();
-            String jenisTanah = (String) view.getjenisTanah().getSelectedItem();
-            String jumlahPohon = (String) view.getjumlahPohon().getSelectedItem();
-            String kadarAir = (String) view.getkadarAir().getSelectedItem();
-            String jumlahPH = (String) view.getjumlahPH().getSelectedItem();
+            String namabuah = (String) view.getNamaBuah().getSelectedItem();
+            String umur = (String) view.getUmur().getSelectedItem();
 
             try {
-                if (strukturTanah.equals("") || luasTanah.equals("") || jenisTanah.equals("") || jumlahPohon.equals("") || kadarAir.equals("") || jumlahPH.equals("")) {
+                if (namabuah.equals("") || umur.equals("")) {
                     JOptionPane.showMessageDialog(view, "data tidak boleh ada yang kosong");
                 } else {
-                    model.analisa(strukturTanah, luasTanah, jenisTanah, jumlahPohon, kadarAir, jumlahPH);
-                    views.getHasil().setText(model.analisa(strukturTanah, luasTanah, jenisTanah, jumlahPohon, kadarAir, jumlahPH));
-                    if (views.getHasil().getText().equals("")) {
+                    model.analisa(namabuah, umur);
+                    view.getHasil().setText(model.analisa(namabuah, umur));
+                    if (view.getHasil().getText().equals("")) {
                         JOptionPane.showMessageDialog(view, "Data Masih belum Ada");
-                    } else {
-                        view.dispose();
-                        views.setVisible(true);
                     }
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(c_pupuk.class.getName()).log(Level.SEVERE, null, ex);
 
             }
+        }
+    }
+
+    private class klikReset implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            view.getHasil().setText("");
+            view.getNamaBuah().setSelectedItem("PILIH TANAMAN");
+            view.getUmur().setSelectedItem("PILIH UMUR");
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            ImageIcon II = new ImageIcon(getClass().getResource("/gambar/reset1.png"));
+            view.getReset().setIcon(II);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            ImageIcon II = new ImageIcon(getClass().getResource("/gambar/reset.png"));
+            view.getReset().setIcon(II);
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            view.getHasil().setText("");
         }
     }
 }

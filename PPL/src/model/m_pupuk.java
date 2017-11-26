@@ -27,13 +27,11 @@ public class m_pupuk {
 
     }
 
-    public String analisa(String strukturTanah, String luasTanah, String jenisTanah, String jumlahPohon, String kadarAir,
-            String jumlahPH) throws SQLException {
+    public String analisa(String namabuah, String umur) throws SQLException {
         String hasil = null;
         try {
-            query = "SELECT hasil FROM analisa WHERE strukturTanah='"
-                    + strukturTanah + "' AND luasTanah='" + luasTanah + "'AND jenisTanah='" + jenisTanah + ""
-                    + "'AND jumlahPohon='" + jumlahPohon + "'AND kadarAir='" + kadarAir + "'AND jumlahPH='" + jumlahPH + "'";
+            query = "SELECT hasil FROM npk WHERE namabuah='"
+                    + namabuah + "' AND umur='" + umur + "'";
             ResultSet rs = kon.getResult(query);
             while (rs.next()) {
                 hasil = rs.getString("hasil");
@@ -46,15 +44,5 @@ public class m_pupuk {
         return hasil;
     }
 
-//    public void cbx() throws SQLException {
-//        query = "SELECT strukturTanah FROM analisa ";
-//        ResultSet rs = kon.getResult(query);
-//        if (rs.next()) {
-//            view.getCombo().addItem(rs.getString("strukturTanah"));
-////            System.out.println(name);
-//            
-//        }
-//
-//    }
 
 }

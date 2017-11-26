@@ -11,6 +11,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimerTask;
 import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import ppl.koneksi;
 
@@ -46,20 +48,34 @@ public class alarm {
             time[4] = Integer.parseInt(rs.getString("timer5"));
 
             task = new TimerTask() {
+                int detik;
+                int a = 0;
+                int hari = 0;
 
                 public void run() {
-                    for (int a = 0; a <= 4; a++) {
-                        System.out.println(a);
-//                        detik = time[a];
-                        System.out.println(" atau "+time[a]);
-                        if (time[a] > 0) {
-                            time[a]--;
-//                            System.out.println("detik" + detik--);
-                            if (time[a] == 0) {
-                                System.out.println(time[a] + tindakan[a]);
+                    while (a <= 4) {
+                        System.out.print(a + ".   ");
+                        detik = time[a];
+                       
+                        System.out.println(" time =" + detik);
+                        while (detik > 0) {
+                            detik--;
+                            try {
+                                Thread.sleep(3*1000);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(alarm.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            System.out.println(detik);
+                            if (detik == 0) {
+                                System.out.println("======");
+                                System.out.println("Tindakan :"+ tindakan[a]);
+                                JOptionPane.showMessageDialog(null, "Sudah "+time[a]+"hari, waktunya anda melakukan"+tindakan[a]);
                             }
                         }
-                        
+                        a++;
+                        if (a == 5) {
+                            System.out.println("SELESAI");
+                        }
                     }
                 }
             };

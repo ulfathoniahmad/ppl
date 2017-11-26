@@ -40,10 +40,14 @@ public class c_home {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            String bibit = (String) view.getBibit().getSelectedItem();
+            
+            
             try {
-                alr.checkAlarm("jeruk").run();
                 timer = new Timer();
-                timer.schedule(alr.checkAlarm("jeruk"), 1000, 10000);
+                timer.schedule(alr.checkAlarm(bibit), 5, 1000);
+                
+                
             } catch (SQLException ex) {
                 Logger.getLogger(c_home.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -100,7 +104,7 @@ public class c_home {
         @Override
         public void mouseClicked(MouseEvent e) {
             try {
-                new c_penyakit();
+                new c_pilihTanaman();
                 view.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(c_home.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,7 +114,7 @@ public class c_home {
         @Override
         public void mousePressed(MouseEvent e) {
             try {
-                new c_penyakit();
+                new c_pilihTanaman();
                 view.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(c_home.class.getName()).log(Level.SEVERE, null, ex);
