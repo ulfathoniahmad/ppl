@@ -5,93 +5,48 @@
  */
 package view;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
-import ppl.koneksi;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
  * @author JEE
  */
-public class isiPenyakit extends javax.swing.JFrame {
+public class farmCalculator extends javax.swing.JFrame {
 
     /**
      * Creates new form isidata
      */
-    koneksi kon;
-    public isiPenyakit() throws SQLException {
+    public farmCalculator() {
         initComponents();
-        kon = new koneksi("ppl", "root", "");
-        jenisPohon();
-        kondisiBuah();
-        kondisiPohon();
-        kondisidaun();
     }
 
-    public void jenisPohon() throws SQLException {
-        String query = "SELECT * FROM penyakit group by jenisPohon ";
-        ResultSet rs = kon.getResult(query);
-        while (rs.next()) {
-            jenisPohon_cb.addItem(rs.getString("jenisPohon"));
-        }
-    }
-     public void kondisiBuah() throws SQLException {
-        String query = "SELECT * FROM penyakit group by kondisiBuah ";
-        ResultSet rs = kon.getResult(query);
-        while (rs.next()) {
-            kondisiBuah_cb.addItem(rs.getString("kondisiBuah"));
-        }
-    }
-      public void kondisiPohon() throws SQLException {
-        String query = "SELECT kondisiPohon FROM penyakit group by kondisiPohon ";
-        ResultSet rs = kon.getResult(query);
-        while (rs.next()) {
-            kondisiPohon_cb.addItem(rs.getString("kondisiPohon"));
-
-        }
-    }
-       public void kondisidaun() throws SQLException {
-        String query = "SELECT * FROM penyakit group by kondisiDaun ";
-        ResultSet rs = kon.getResult(query);
-        while (rs.next()) {
-            kondisiDaun_cb.addItem(rs.getString("kondisiDaun"));
-
-        }
-    }
-    public JComboBox <String> getjenisPohon() {
-        return jenisPohon_cb;
-
+    public JTextField nitrogen() {
+        return nitrogen_tf;
     }
 
-    public JComboBox <String> getkondisiPohon() {
-        return kondisiPohon_cb;
-
+    public JTextField fosfor() {
+        return fosfor_tf;
     }
 
-    public JComboBox <String>  getkondisiBuah() {
-        return kondisiBuah_cb;
-
+    public JTextField kalium() {
+        return kalium_tf;
     }
 
-    public JComboBox <String>  getkondisiDaun() {
-        return kondisiDaun_cb;
-
-    }
-
-    public JLabel getAnalisa() {
-        return analisa_btn;
-    }
-    
-    public  JLabel getKembali(){
+    public JLabel back() {
         return kembali_btn;
     }
-    
-    
+
+    public JTextArea hasil() {
+        return hasil_tf;
+    }
+
+    public JLabel fertilizer() {
+        return analisa_btn;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,16 +57,16 @@ public class isiPenyakit extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jenisPohon_cb = new javax.swing.JComboBox<>();
-        kondisiPohon_cb = new javax.swing.JComboBox<>();
-        kondisiBuah_cb = new javax.swing.JComboBox<>();
-        kondisiDaun_cb = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         kembali_btn = new javax.swing.JLabel();
         analisa_btn = new javax.swing.JLabel();
+        kalium_tf = new javax.swing.JTextField();
+        nitrogen_tf = new javax.swing.JTextField();
+        fosfor_tf = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        hasil_tf = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -121,28 +76,16 @@ public class isiPenyakit extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(jenisPohon_cb, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 460, 30));
-
-        jPanel1.add(kondisiPohon_cb, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 460, 30));
-
-        jPanel1.add(kondisiBuah_cb, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 460, 30));
-
-        jPanel1.add(kondisiDaun_cb, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 460, 30));
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel5.setText("Kondisi Buah Yang di Hasilkan");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
-
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel4.setText("Kondisi Daun");
+        jLabel4.setText("K ( Kalium)");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel3.setText("Kondisi Pohon");
+        jLabel3.setText("P (Fosfor)");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel2.setText("Jenis Pohon");
+        jLabel2.setText("N (Nitrogen)");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         kembali_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/back.png"))); // NOI18N
@@ -151,22 +94,77 @@ public class isiPenyakit extends javax.swing.JFrame {
         analisa_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/anal1.png"))); // NOI18N
         jPanel1.add(analisa_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 380, -1, -1));
 
+        kalium_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                kalium_tfKeyTyped(evt);
+            }
+        });
+        jPanel1.add(kalium_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 460, 30));
+
+        nitrogen_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nitrogen_tfKeyTyped(evt);
+            }
+        });
+        jPanel1.add(nitrogen_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 460, 30));
+
+        fosfor_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fosfor_tfKeyTyped(evt);
+            }
+        });
+        jPanel1.add(fosfor_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 460, 30));
+
+        hasil_tf.setEditable(false);
+        hasil_tf.setColumns(20);
+        hasil_tf.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        hasil_tf.setRows(5);
+        hasil_tf.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(hasil_tf);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 240, 160));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 830, 470));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("LIHAT APA YANG TERJADI");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+        jLabel8.setText("Farm CALCULATOR");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/ab.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 891, 544));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void kembali_btnMouseClicked(java.awt.event.MouseEvent evt) {                                            
+
+    private void nitrogen_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nitrogen_tfKeyTyped
+        char karakter = evt.getKeyChar();
+        if (!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_nitrogen_tfKeyTyped
+
+    private void fosfor_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fosfor_tfKeyTyped
+        char karakter = evt.getKeyChar();
+        if (!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_fosfor_tfKeyTyped
+
+    private void kalium_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kalium_tfKeyTyped
+        char karakter = evt.getKeyChar();
+        if (!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_kalium_tfKeyTyped
+    private void kembali_btnMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
 
-    }  
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -184,43 +182,41 @@ public class isiPenyakit extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(isiPenyakit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(farmCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(isiPenyakit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(farmCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(isiPenyakit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(farmCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(isiPenyakit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(farmCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new isiPenyakit().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(isiPenyakit.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new farmCalculator().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel analisa_btn;
+    private javax.swing.JTextField fosfor_tf;
+    private javax.swing.JTextArea hasil_tf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> jenisPohon_cb;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField kalium_tf;
     private javax.swing.JLabel kembali_btn;
-    private javax.swing.JComboBox<String> kondisiBuah_cb;
-    private javax.swing.JComboBox<String> kondisiDaun_cb;
-    private javax.swing.JComboBox<String> kondisiPohon_cb;
+    private javax.swing.JTextField nitrogen_tf;
     // End of variables declaration//GEN-END:variables
 
     static class setVisible {

@@ -5,18 +5,13 @@
  */
 package contoroler;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import model.m_penyakit;
-import view.isiPenyakit;
 import view.pilihTanaman;
 
 /**
@@ -189,12 +184,14 @@ public class c_pilihTanaman {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            ImageIcon II = new ImageIcon(getClass().getResource("/gambar/durian1.png"));
+            view.getDurian().setIcon(II);
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            ImageIcon II = new ImageIcon(getClass().getResource("/gambar/durian.png"));
+            view.getDurian().setIcon(II);
         }
 
     }

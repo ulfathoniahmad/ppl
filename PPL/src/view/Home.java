@@ -5,14 +5,11 @@
  */
 package view;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import ppl.koneksi;
 
 /**
  *
@@ -23,36 +20,24 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
-    koneksi kon;
 
-    public Home() throws SQLException {
+    public Home(){
         initComponents();
-        kon = new koneksi("ppl", "root", "");
-        jenisPohon();
     }
 
-    public void jenisPohon() throws SQLException {
-        String query = "SELECT * FROM penjadwalan group by bibit ";
-        ResultSet rs = kon.getResult(query);
-        while (rs.next()) {
-            bibit_cb.addItem(rs.getString("bibit"));
-        }
-    }
 
     public JLabel getPupuk() {
         return pupuk_btn;
     }
 
-    public JComboBox<String> getBibit() {
-        return bibit_cb;
-    }
+    
 
     public JLabel getPenyakit() {
         return penyakit_btn;
     }
-
-    public JButton getGo() {
-        return go_btn;
+    
+    public JLabel getCalculator() {
+        return calculator_btn;
     }
 
     /**
@@ -66,27 +51,18 @@ public class Home extends javax.swing.JFrame {
 
         pupuk_btn = new javax.swing.JLabel();
         penyakit_btn = new javax.swing.JLabel();
-        bibit_cb = new javax.swing.JComboBox<>();
-        go_btn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        calculator_btn = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pupuk_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/seeds.png"))); // NOI18N
 
         penyakit_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/pest.png"))); // NOI18N
-
-        bibit_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PILIH BIBIT" }));
-
-        go_btn.setText("GO");
-        go_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                go_btnActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
         jLabel1.setText("SELAMAT DATANG");
@@ -95,9 +71,15 @@ public class Home extends javax.swing.JFrame {
         jLabel2.setText("ANALISA PUPUK");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel3.setText("PENYAKIT");
+        jLabel3.setText("Farm CALCULATOR");
 
-        jLabel4.setText("ALARM");
+        calculator_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/calculator.png"))); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel6.setText("PENYAKIT");
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        jLabel5.setText("PPL & MPTI - 6A");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,53 +91,48 @@ public class Home extends javax.swing.JFrame {
                         .addGap(123, 123, 123)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pupuk_btn)
+                            .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pupuk_btn, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(102, 102, 102)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(penyakit_btn)
+                                    .addComponent(jLabel5)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jLabel3))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bibit_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(107, 107, 107)
-                                .addComponent(go_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                                        .addComponent(penyakit_btn)
+                                        .addGap(39, 39, 39)
+                                        .addComponent(calculator_btn)))))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pupuk_btn)
-                    .addComponent(penyakit_btn))
-                .addGap(48, 48, 48)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(go_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bibit_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72))
+                    .addComponent(penyakit_btn)
+                    .addComponent(calculator_btn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void go_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_btnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_go_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,22 +164,18 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
                     new Home().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> bibit_cb;
-    private javax.swing.JButton go_btn;
+    private javax.swing.JLabel calculator_btn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel penyakit_btn;
     private javax.swing.JLabel pupuk_btn;
     // End of variables declaration//GEN-END:variables

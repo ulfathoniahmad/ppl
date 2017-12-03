@@ -5,8 +5,6 @@
  */
 package contoroler;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
@@ -15,7 +13,6 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import model.m_pupuk;
-import view.hasil;
 import view.pupuk;
 
 /**
@@ -25,12 +22,10 @@ import view.pupuk;
 public class c_pupuk {
 
     pupuk view;
-    hasil views;
     m_pupuk model;
 
     public c_pupuk() throws SQLException {
         view = new pupuk();
-        views = new hasil();
         model = new m_pupuk();
         view.getAnalisa().addMouseListener((MouseListener) new klikAnalisa());
         view.setVisible(true);
@@ -132,7 +127,7 @@ public class c_pupuk {
                     model.analisa(namabuah, umur);
                     view.getHasil().setText(model.analisa(namabuah, umur));
                     if (view.getHasil().getText().equals("")) {
-                        JOptionPane.showMessageDialog(view, "Data Masih belum Ada");
+                        JOptionPane.showMessageDialog(view, "SiLahkan Pilih Data Terlebih Dahulu");
                     }
                 }
             } catch (SQLException ex) {

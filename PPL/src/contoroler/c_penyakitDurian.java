@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.m_penyakit;
-import view.isiPenyakit;
+import view.farmCalculator;
 import view.penyakitDurian;
 import view.penyakitJeruk;
 import view.pilihTanaman;

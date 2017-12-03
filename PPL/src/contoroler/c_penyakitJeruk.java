@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.m_penyakit;
-import view.isiPenyakit;
+import view.farmCalculator;
 import view.penyakitJeruk;
 import view.pilihTanaman;
 
@@ -129,7 +129,7 @@ public class c_penyakitJeruk {
         public void mouseClicked(MouseEvent e) {
 
             try {
-                JOptionPane.showConfirmDialog(view, "Bolehkan Membuka Software Lain?");
+//                JOptionPane.showConfirmDialog(view, "Bolehkan Membuka Software Lain?");
                 Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + "C:\\Users\\JEE\\Documents\\NetBeansProjects\\PPL\\src\\penyakit\\CVPD.pdf");
 //            cvpd.getHasil().setText(model.jerukcvpd());
 //            view.dispose();
@@ -147,7 +147,7 @@ public class c_penyakitJeruk {
         @Override
         public void mousePressed(MouseEvent e) {
             try {
-                JOptionPane.showConfirmDialog(view, "Bolehkan Membuka SOftware Lain?");
+//                JOptionPane.showConfirmDialog(view, "Bolehkan Membuka SOftware Lain?");
                 Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + "C:\\Users\\JEE\\Documents\\NetBeansProjects\\PPL\\src\\penyakit\\CVPD.pdf");
             } catch (Exception ex) {
                 Logger.getLogger(c_penyakitJeruk.class.getName()).log(Level.SEVERE, null, ex);
